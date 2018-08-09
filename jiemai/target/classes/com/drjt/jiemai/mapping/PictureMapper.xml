@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Picture" >
+    <id column="pic_id" property="picId" jdbcType="INTEGER" />
+    <result column="com_id" property="comId" jdbcType="INTEGER" />
+    <result column="pic_name" property="picName" jdbcType="VARCHAR" />
+    <result column="pic_address" property="picAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pic_id, com_id, pic_name, pic_address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from picture
+    where pic_id = #{picId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from picture
+    where pic_id = #{picId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Picture" >
+    insert into picture (pic_id, com_id, pic_name, 
+      pic_address)
+    values (#{picId,jdbcType=INTEGER}, #{comId,jdbcType=INTEGER}, #{picName,jdbcType=VARCHAR}, 
+      #{picAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Picture" >
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="picId != null" >
+        pic_id,
+      </if>
+      <if test="comId != null" >
+        com_id,
+      </if>
+      <if test="picName != null" >
+        pic_name,
+      </if>
+      <if test="picAddress != null" >
+        pic_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="picId != null" >
+        #{picId,jdbcType=INTEGER},
+      </if>
+      <if test="comId != null" >
+        #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="picName != null" >
+        #{picName,jdbcType=VARCHAR},
+      </if>
+      <if test="picAddress != null" >
+        #{picAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Picture" >
+    update picture
+    <set >
+      <if test="comId != null" >
+        com_id = #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="picName != null" >
+        pic_name = #{picName,jdbcType=VARCHAR},
+      </if>
+      <if test="picAddress != null" >
+        pic_address = #{picAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pic_id = #{picId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Picture" >
+    update picture
+    set com_id = #{comId,jdbcType=INTEGER},
+      pic_name = #{picName,jdbcType=VARCHAR},
+      pic_address = #{picAddress,jdbcType=VARCHAR}
+    where pic_id = #{picId,jdbcType=INTEGER}
+  </update>
+</mapper>

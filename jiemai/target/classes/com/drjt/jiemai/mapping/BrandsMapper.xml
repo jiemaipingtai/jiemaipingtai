@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.BrandsMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Brands" >
+    <id column="bra_id" property="braId" jdbcType="INTEGER" />
+    <result column="bra_name" property="braName" jdbcType="VARCHAR" />
+    <result column="bra_pwd" property="braPwd" jdbcType="VARCHAR" />
+    <result column="bra_nikename" property="braNikename" jdbcType="VARCHAR" />
+    <result column="bra_serx" property="braSerx" jdbcType="INTEGER" />
+    <result column="bra_phone" property="braPhone" jdbcType="VARCHAR" />
+    <result column="bra_email" property="braEmail" jdbcType="VARCHAR" />
+    <result column="pos_id" property="posId" jdbcType="INTEGER" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="money_id" property="moneyId" jdbcType="INTEGER" />
+    <result column="usersta_id" property="userstaId" jdbcType="INTEGER" />
+    <result column="bra_regdate" property="braRegdate" jdbcType="DATE" />
+    <result column="bra_moddate" property="braModdate" jdbcType="DATE" />
+    <result column="bra_operation" property="braOperation" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.drjt.jiemai.pojo.Brands" extends="BaseResultMap" >
+    <result column="bra_realname" property="braRealname" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bra_id, bra_name, bra_pwd, bra_nikename, bra_serx, bra_phone, bra_email, pos_id, 
+    company_id, money_id, usersta_id, bra_regdate, bra_moddate, bra_operation
+  </sql>
+  <sql id="Blob_Column_List" >
+    bra_realname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from brands
+    where bra_id = #{braId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from brands
+    where bra_id = #{braId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Brands" >
+    insert into brands (bra_id, bra_name, bra_pwd, 
+      bra_nikename, bra_serx, bra_phone, 
+      bra_email, pos_id, company_id, 
+      money_id, usersta_id, bra_regdate, 
+      bra_moddate, bra_operation, bra_realname
+      )
+    values (#{braId,jdbcType=INTEGER}, #{braName,jdbcType=VARCHAR}, #{braPwd,jdbcType=VARCHAR}, 
+      #{braNikename,jdbcType=VARCHAR}, #{braSerx,jdbcType=INTEGER}, #{braPhone,jdbcType=VARCHAR}, 
+      #{braEmail,jdbcType=VARCHAR}, #{posId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
+      #{moneyId,jdbcType=INTEGER}, #{userstaId,jdbcType=INTEGER}, #{braRegdate,jdbcType=DATE}, 
+      #{braModdate,jdbcType=DATE}, #{braOperation,jdbcType=INTEGER}, #{braRealname,jdbcType=VARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Brands" >
+    insert into brands
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="braId != null" >
+        bra_id,
+      </if>
+      <if test="braName != null" >
+        bra_name,
+      </if>
+      <if test="braPwd != null" >
+        bra_pwd,
+      </if>
+      <if test="braNikename != null" >
+        bra_nikename,
+      </if>
+      <if test="braSerx != null" >
+        bra_serx,
+      </if>
+      <if test="braPhone != null" >
+        bra_phone,
+      </if>
+      <if test="braEmail != null" >
+        bra_email,
+      </if>
+      <if test="posId != null" >
+        pos_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="moneyId != null" >
+        money_id,
+      </if>
+      <if test="userstaId != null" >
+        usersta_id,
+      </if>
+      <if test="braRegdate != null" >
+        bra_regdate,
+      </if>
+      <if test="braModdate != null" >
+        bra_moddate,
+      </if>
+      <if test="braOperation != null" >
+        bra_operation,
+      </if>
+      <if test="braRealname != null" >
+        bra_realname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="braId != null" >
+        #{braId,jdbcType=INTEGER},
+      </if>
+      <if test="braName != null" >
+        #{braName,jdbcType=VARCHAR},
+      </if>
+      <if test="braPwd != null" >
+        #{braPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="braNikename != null" >
+        #{braNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="braSerx != null" >
+        #{braSerx,jdbcType=INTEGER},
+      </if>
+      <if test="braPhone != null" >
+        #{braPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="braEmail != null" >
+        #{braEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="posId != null" >
+        #{posId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="moneyId != null" >
+        #{moneyId,jdbcType=INTEGER},
+      </if>
+      <if test="userstaId != null" >
+        #{userstaId,jdbcType=INTEGER},
+      </if>
+      <if test="braRegdate != null" >
+        #{braRegdate,jdbcType=DATE},
+      </if>
+      <if test="braModdate != null" >
+        #{braModdate,jdbcType=DATE},
+      </if>
+      <if test="braOperation != null" >
+        #{braOperation,jdbcType=INTEGER},
+      </if>
+      <if test="braRealname != null" >
+        #{braRealname,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Brands" >
+    update brands
+    <set >
+      <if test="braName != null" >
+        bra_name = #{braName,jdbcType=VARCHAR},
+      </if>
+      <if test="braPwd != null" >
+        bra_pwd = #{braPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="braNikename != null" >
+        bra_nikename = #{braNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="braSerx != null" >
+        bra_serx = #{braSerx,jdbcType=INTEGER},
+      </if>
+      <if test="braPhone != null" >
+        bra_phone = #{braPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="braEmail != null" >
+        bra_email = #{braEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="posId != null" >
+        pos_id = #{posId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="moneyId != null" >
+        money_id = #{moneyId,jdbcType=INTEGER},
+      </if>
+      <if test="userstaId != null" >
+        usersta_id = #{userstaId,jdbcType=INTEGER},
+      </if>
+      <if test="braRegdate != null" >
+        bra_regdate = #{braRegdate,jdbcType=DATE},
+      </if>
+      <if test="braModdate != null" >
+        bra_moddate = #{braModdate,jdbcType=DATE},
+      </if>
+      <if test="braOperation != null" >
+        bra_operation = #{braOperation,jdbcType=INTEGER},
+      </if>
+      <if test="braRealname != null" >
+        bra_realname = #{braRealname,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where bra_id = #{braId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.drjt.jiemai.pojo.Brands" >
+    update brands
+    set bra_name = #{braName,jdbcType=VARCHAR},
+      bra_pwd = #{braPwd,jdbcType=VARCHAR},
+      bra_nikename = #{braNikename,jdbcType=VARCHAR},
+      bra_serx = #{braSerx,jdbcType=INTEGER},
+      bra_phone = #{braPhone,jdbcType=VARCHAR},
+      bra_email = #{braEmail,jdbcType=VARCHAR},
+      pos_id = #{posId,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      money_id = #{moneyId,jdbcType=INTEGER},
+      usersta_id = #{userstaId,jdbcType=INTEGER},
+      bra_regdate = #{braRegdate,jdbcType=DATE},
+      bra_moddate = #{braModdate,jdbcType=DATE},
+      bra_operation = #{braOperation,jdbcType=INTEGER},
+      bra_realname = #{braRealname,jdbcType=VARBINARY}
+    where bra_id = #{braId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Brands" >
+    update brands
+    set bra_name = #{braName,jdbcType=VARCHAR},
+      bra_pwd = #{braPwd,jdbcType=VARCHAR},
+      bra_nikename = #{braNikename,jdbcType=VARCHAR},
+      bra_serx = #{braSerx,jdbcType=INTEGER},
+      bra_phone = #{braPhone,jdbcType=VARCHAR},
+      bra_email = #{braEmail,jdbcType=VARCHAR},
+      pos_id = #{posId,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      money_id = #{moneyId,jdbcType=INTEGER},
+      usersta_id = #{userstaId,jdbcType=INTEGER},
+      bra_regdate = #{braRegdate,jdbcType=DATE},
+      bra_moddate = #{braModdate,jdbcType=DATE},
+      bra_operation = #{braOperation,jdbcType=INTEGER}
+    where bra_id = #{braId,jdbcType=INTEGER}
+  </update>
+</mapper>

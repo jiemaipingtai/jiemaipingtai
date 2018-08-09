@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Admin" >
+    <id column="adm_id" property="admId" jdbcType="INTEGER" />
+    <result column="adm_name" property="admName" jdbcType="VARCHAR" />
+    <result column="adm_pwd" property="admPwd" jdbcType="VARCHAR" />
+    <result column="adm_nikename" property="admNikename" jdbcType="VARCHAR" />
+    <result column="adm_realname" property="admRealname" jdbcType="VARCHAR" />
+    <result column="adm_sex" property="admSex" jdbcType="INTEGER" />
+    <result column="amd_phone" property="amdPhone" jdbcType="VARCHAR" />
+    <result column="adm_email" property="admEmail" jdbcType="VARCHAR" />
+    <result column="amd_regtiime" property="amdRegtiime" jdbcType="DATE" />
+    <result column="adm_modtime" property="admModtime" jdbcType="DATE" />
+    <result column="bra_operation" property="braOperation" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    adm_id, adm_name, adm_pwd, adm_nikename, adm_realname, adm_sex, amd_phone, adm_email, 
+    amd_regtiime, adm_modtime, bra_operation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where adm_id = #{admId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where adm_id = #{admId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Admin" >
+    insert into admin (adm_id, adm_name, adm_pwd, 
+      adm_nikename, adm_realname, adm_sex, 
+      amd_phone, adm_email, amd_regtiime, 
+      adm_modtime, bra_operation)
+    values (#{admId,jdbcType=INTEGER}, #{admName,jdbcType=VARCHAR}, #{admPwd,jdbcType=VARCHAR}, 
+      #{admNikename,jdbcType=VARCHAR}, #{admRealname,jdbcType=VARCHAR}, #{admSex,jdbcType=INTEGER}, 
+      #{amdPhone,jdbcType=VARCHAR}, #{admEmail,jdbcType=VARCHAR}, #{amdRegtiime,jdbcType=DATE}, 
+      #{admModtime,jdbcType=DATE}, #{braOperation,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="admId != null" >
+        adm_id,
+      </if>
+      <if test="admName != null" >
+        adm_name,
+      </if>
+      <if test="admPwd != null" >
+        adm_pwd,
+      </if>
+      <if test="admNikename != null" >
+        adm_nikename,
+      </if>
+      <if test="admRealname != null" >
+        adm_realname,
+      </if>
+      <if test="admSex != null" >
+        adm_sex,
+      </if>
+      <if test="amdPhone != null" >
+        amd_phone,
+      </if>
+      <if test="admEmail != null" >
+        adm_email,
+      </if>
+      <if test="amdRegtiime != null" >
+        amd_regtiime,
+      </if>
+      <if test="admModtime != null" >
+        adm_modtime,
+      </if>
+      <if test="braOperation != null" >
+        bra_operation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="admId != null" >
+        #{admId,jdbcType=INTEGER},
+      </if>
+      <if test="admName != null" >
+        #{admName,jdbcType=VARCHAR},
+      </if>
+      <if test="admPwd != null" >
+        #{admPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="admNikename != null" >
+        #{admNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="admRealname != null" >
+        #{admRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="admSex != null" >
+        #{admSex,jdbcType=INTEGER},
+      </if>
+      <if test="amdPhone != null" >
+        #{amdPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="admEmail != null" >
+        #{admEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="amdRegtiime != null" >
+        #{amdRegtiime,jdbcType=DATE},
+      </if>
+      <if test="admModtime != null" >
+        #{admModtime,jdbcType=DATE},
+      </if>
+      <if test="braOperation != null" >
+        #{braOperation,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Admin" >
+    update admin
+    <set >
+      <if test="admName != null" >
+        adm_name = #{admName,jdbcType=VARCHAR},
+      </if>
+      <if test="admPwd != null" >
+        adm_pwd = #{admPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="admNikename != null" >
+        adm_nikename = #{admNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="admRealname != null" >
+        adm_realname = #{admRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="admSex != null" >
+        adm_sex = #{admSex,jdbcType=INTEGER},
+      </if>
+      <if test="amdPhone != null" >
+        amd_phone = #{amdPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="admEmail != null" >
+        adm_email = #{admEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="amdRegtiime != null" >
+        amd_regtiime = #{amdRegtiime,jdbcType=DATE},
+      </if>
+      <if test="admModtime != null" >
+        adm_modtime = #{admModtime,jdbcType=DATE},
+      </if>
+      <if test="braOperation != null" >
+        bra_operation = #{braOperation,jdbcType=INTEGER},
+      </if>
+    </set>
+    where adm_id = #{admId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Admin" >
+    update admin
+    set adm_name = #{admName,jdbcType=VARCHAR},
+      adm_pwd = #{admPwd,jdbcType=VARCHAR},
+      adm_nikename = #{admNikename,jdbcType=VARCHAR},
+      adm_realname = #{admRealname,jdbcType=VARCHAR},
+      adm_sex = #{admSex,jdbcType=INTEGER},
+      amd_phone = #{amdPhone,jdbcType=VARCHAR},
+      adm_email = #{admEmail,jdbcType=VARCHAR},
+      amd_regtiime = #{amdRegtiime,jdbcType=DATE},
+      adm_modtime = #{admModtime,jdbcType=DATE},
+      bra_operation = #{braOperation,jdbcType=INTEGER}
+    where adm_id = #{admId,jdbcType=INTEGER}
+  </update>
+</mapper>

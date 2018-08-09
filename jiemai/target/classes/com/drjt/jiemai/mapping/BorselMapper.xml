@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.BorselMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Borsel" >
+    <id column="bor_id" property="borId" jdbcType="INTEGER" />
+    <result column="bor_name" property="borName" jdbcType="VARCHAR" />
+    <result column="bor_pwd" property="borPwd" jdbcType="VARCHAR" />
+    <result column="bor_nikename" property="borNikename" jdbcType="VARCHAR" />
+    <result column="bor_realname" property="borRealname" jdbcType="VARCHAR" />
+    <result column="bor_sex" property="borSex" jdbcType="INTEGER" />
+    <result column="bor_phone" property="borPhone" jdbcType="VARCHAR" />
+    <result column="bor_email" property="borEmail" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="money_id" property="moneyId" jdbcType="INTEGER" />
+    <result column="usersta_id" property="userstaId" jdbcType="INTEGER" />
+    <result column="bor_regdate" property="borRegdate" jdbcType="DATE" />
+    <result column="bor_moddate" property="borModdate" jdbcType="DATE" />
+    <result column="bra_operation" property="braOperation" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bor_id, bor_name, bor_pwd, bor_nikename, bor_realname, bor_sex, bor_phone, bor_email, 
+    company_id, money_id, usersta_id, bor_regdate, bor_moddate, bra_operation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from borsel
+    where bor_id = #{borId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from borsel
+    where bor_id = #{borId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Borsel" >
+    insert into borsel (bor_id, bor_name, bor_pwd, 
+      bor_nikename, bor_realname, bor_sex, 
+      bor_phone, bor_email, company_id, 
+      money_id, usersta_id, bor_regdate, 
+      bor_moddate, bra_operation)
+    values (#{borId,jdbcType=INTEGER}, #{borName,jdbcType=VARCHAR}, #{borPwd,jdbcType=VARCHAR}, 
+      #{borNikename,jdbcType=VARCHAR}, #{borRealname,jdbcType=VARCHAR}, #{borSex,jdbcType=INTEGER}, 
+      #{borPhone,jdbcType=VARCHAR}, #{borEmail,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}, 
+      #{moneyId,jdbcType=INTEGER}, #{userstaId,jdbcType=INTEGER}, #{borRegdate,jdbcType=DATE}, 
+      #{borModdate,jdbcType=DATE}, #{braOperation,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Borsel" >
+    insert into borsel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="borId != null" >
+        bor_id,
+      </if>
+      <if test="borName != null" >
+        bor_name,
+      </if>
+      <if test="borPwd != null" >
+        bor_pwd,
+      </if>
+      <if test="borNikename != null" >
+        bor_nikename,
+      </if>
+      <if test="borRealname != null" >
+        bor_realname,
+      </if>
+      <if test="borSex != null" >
+        bor_sex,
+      </if>
+      <if test="borPhone != null" >
+        bor_phone,
+      </if>
+      <if test="borEmail != null" >
+        bor_email,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="moneyId != null" >
+        money_id,
+      </if>
+      <if test="userstaId != null" >
+        usersta_id,
+      </if>
+      <if test="borRegdate != null" >
+        bor_regdate,
+      </if>
+      <if test="borModdate != null" >
+        bor_moddate,
+      </if>
+      <if test="braOperation != null" >
+        bra_operation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="borId != null" >
+        #{borId,jdbcType=INTEGER},
+      </if>
+      <if test="borName != null" >
+        #{borName,jdbcType=VARCHAR},
+      </if>
+      <if test="borPwd != null" >
+        #{borPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="borNikename != null" >
+        #{borNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="borRealname != null" >
+        #{borRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="borSex != null" >
+        #{borSex,jdbcType=INTEGER},
+      </if>
+      <if test="borPhone != null" >
+        #{borPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="borEmail != null" >
+        #{borEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="moneyId != null" >
+        #{moneyId,jdbcType=INTEGER},
+      </if>
+      <if test="userstaId != null" >
+        #{userstaId,jdbcType=INTEGER},
+      </if>
+      <if test="borRegdate != null" >
+        #{borRegdate,jdbcType=DATE},
+      </if>
+      <if test="borModdate != null" >
+        #{borModdate,jdbcType=DATE},
+      </if>
+      <if test="braOperation != null" >
+        #{braOperation,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Borsel" >
+    update borsel
+    <set >
+      <if test="borName != null" >
+        bor_name = #{borName,jdbcType=VARCHAR},
+      </if>
+      <if test="borPwd != null" >
+        bor_pwd = #{borPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="borNikename != null" >
+        bor_nikename = #{borNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="borRealname != null" >
+        bor_realname = #{borRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="borSex != null" >
+        bor_sex = #{borSex,jdbcType=INTEGER},
+      </if>
+      <if test="borPhone != null" >
+        bor_phone = #{borPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="borEmail != null" >
+        bor_email = #{borEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="moneyId != null" >
+        money_id = #{moneyId,jdbcType=INTEGER},
+      </if>
+      <if test="userstaId != null" >
+        usersta_id = #{userstaId,jdbcType=INTEGER},
+      </if>
+      <if test="borRegdate != null" >
+        bor_regdate = #{borRegdate,jdbcType=DATE},
+      </if>
+      <if test="borModdate != null" >
+        bor_moddate = #{borModdate,jdbcType=DATE},
+      </if>
+      <if test="braOperation != null" >
+        bra_operation = #{braOperation,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bor_id = #{borId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Borsel" >
+    update borsel
+    set bor_name = #{borName,jdbcType=VARCHAR},
+      bor_pwd = #{borPwd,jdbcType=VARCHAR},
+      bor_nikename = #{borNikename,jdbcType=VARCHAR},
+      bor_realname = #{borRealname,jdbcType=VARCHAR},
+      bor_sex = #{borSex,jdbcType=INTEGER},
+      bor_phone = #{borPhone,jdbcType=VARCHAR},
+      bor_email = #{borEmail,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER},
+      money_id = #{moneyId,jdbcType=INTEGER},
+      usersta_id = #{userstaId,jdbcType=INTEGER},
+      bor_regdate = #{borRegdate,jdbcType=DATE},
+      bor_moddate = #{borModdate,jdbcType=DATE},
+      bra_operation = #{braOperation,jdbcType=INTEGER}
+    where bor_id = #{borId,jdbcType=INTEGER}
+  </update>
+</mapper>

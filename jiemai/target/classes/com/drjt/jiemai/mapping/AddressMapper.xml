@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.AddressMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Address" >
+    <id column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="cou_id" property="couId" jdbcType="INTEGER" />
+    <result column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="cit_id" property="citId" jdbcType="INTEGER" />
+    <result column="Detailed_address" property="detailedAddress" jdbcType="VARCHAR" />
+    <result column="Consignee" property="consignee" jdbcType="VARCHAR" />
+    <result column="add_phone" property="addPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    address_id, cou_id, pro_id, cit_id, Detailed_address, Consignee, add_phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from address
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from address
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Address" >
+    insert into address (address_id, cou_id, pro_id, 
+      cit_id, Detailed_address, Consignee, 
+      add_phone)
+    values (#{addressId,jdbcType=INTEGER}, #{couId,jdbcType=INTEGER}, #{proId,jdbcType=INTEGER}, 
+      #{citId,jdbcType=INTEGER}, #{detailedAddress,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, 
+      #{addPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Address" >
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="couId != null" >
+        cou_id,
+      </if>
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="citId != null" >
+        cit_id,
+      </if>
+      <if test="detailedAddress != null" >
+        Detailed_address,
+      </if>
+      <if test="consignee != null" >
+        Consignee,
+      </if>
+      <if test="addPhone != null" >
+        add_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="couId != null" >
+        #{couId,jdbcType=INTEGER},
+      </if>
+      <if test="proId != null" >
+        #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="citId != null" >
+        #{citId,jdbcType=INTEGER},
+      </if>
+      <if test="detailedAddress != null" >
+        #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="addPhone != null" >
+        #{addPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Address" >
+    update address
+    <set >
+      <if test="couId != null" >
+        cou_id = #{couId,jdbcType=INTEGER},
+      </if>
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="citId != null" >
+        cit_id = #{citId,jdbcType=INTEGER},
+      </if>
+      <if test="detailedAddress != null" >
+        Detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        Consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="addPhone != null" >
+        add_phone = #{addPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Address" >
+    update address
+    set cou_id = #{couId,jdbcType=INTEGER},
+      pro_id = #{proId,jdbcType=INTEGER},
+      cit_id = #{citId,jdbcType=INTEGER},
+      Detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      Consignee = #{consignee,jdbcType=VARCHAR},
+      add_phone = #{addPhone,jdbcType=VARCHAR}
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+</mapper>

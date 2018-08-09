@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.ComplaintsMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Complaints" >
+    <id column="complaints_id" property="complaintsId" jdbcType="INTEGER" />
+    <result column="com_id" property="comId" jdbcType="INTEGER" />
+    <result column="complaints_name" property="complaintsName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="complaints_time" property="complaintsTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    complaints_id, com_id, complaints_name, user_id, complaints_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from complaints
+    where complaints_id = #{complaintsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from complaints
+    where complaints_id = #{complaintsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Complaints" >
+    insert into complaints (complaints_id, com_id, complaints_name, 
+      user_id, complaints_time)
+    values (#{complaintsId,jdbcType=INTEGER}, #{comId,jdbcType=INTEGER}, #{complaintsName,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{complaintsTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Complaints" >
+    insert into complaints
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="complaintsId != null" >
+        complaints_id,
+      </if>
+      <if test="comId != null" >
+        com_id,
+      </if>
+      <if test="complaintsName != null" >
+        complaints_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="complaintsTime != null" >
+        complaints_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="complaintsId != null" >
+        #{complaintsId,jdbcType=INTEGER},
+      </if>
+      <if test="comId != null" >
+        #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="complaintsName != null" >
+        #{complaintsName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="complaintsTime != null" >
+        #{complaintsTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Complaints" >
+    update complaints
+    <set >
+      <if test="comId != null" >
+        com_id = #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="complaintsName != null" >
+        complaints_name = #{complaintsName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="complaintsTime != null" >
+        complaints_time = #{complaintsTime,jdbcType=DATE},
+      </if>
+    </set>
+    where complaints_id = #{complaintsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Complaints" >
+    update complaints
+    set com_id = #{comId,jdbcType=INTEGER},
+      complaints_name = #{complaintsName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      complaints_time = #{complaintsTime,jdbcType=DATE}
+    where complaints_id = #{complaintsId,jdbcType=INTEGER}
+  </update>
+</mapper>

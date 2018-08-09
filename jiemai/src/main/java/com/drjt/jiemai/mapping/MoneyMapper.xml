@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.MoneyMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Money" >
+    <id column="money_id" property="moneyId" jdbcType="INTEGER" />
+    <result column="ban_id" property="banId" jdbcType="INTEGER" />
+    <result column="acc_id" property="accId" jdbcType="INTEGER" />
+    <result column="money_pwd" property="moneyPwd" jdbcType="INTEGER" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    money_id, ban_id, acc_id, money_pwd, balance
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from money
+    where money_id = #{moneyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from money
+    where money_id = #{moneyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Money" >
+    insert into money (money_id, ban_id, acc_id, 
+      money_pwd, balance)
+    values (#{moneyId,jdbcType=INTEGER}, #{banId,jdbcType=INTEGER}, #{accId,jdbcType=INTEGER}, 
+      #{moneyPwd,jdbcType=INTEGER}, #{balance,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Money" >
+    insert into money
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="moneyId != null" >
+        money_id,
+      </if>
+      <if test="banId != null" >
+        ban_id,
+      </if>
+      <if test="accId != null" >
+        acc_id,
+      </if>
+      <if test="moneyPwd != null" >
+        money_pwd,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="moneyId != null" >
+        #{moneyId,jdbcType=INTEGER},
+      </if>
+      <if test="banId != null" >
+        #{banId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="moneyPwd != null" >
+        #{moneyPwd,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Money" >
+    update money
+    <set >
+      <if test="banId != null" >
+        ban_id = #{banId,jdbcType=INTEGER},
+      </if>
+      <if test="accId != null" >
+        acc_id = #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="moneyPwd != null" >
+        money_pwd = #{moneyPwd,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where money_id = #{moneyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Money" >
+    update money
+    set ban_id = #{banId,jdbcType=INTEGER},
+      acc_id = #{accId,jdbcType=INTEGER},
+      money_pwd = #{moneyPwd,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=DOUBLE}
+    where money_id = #{moneyId,jdbcType=INTEGER}
+  </update>
+</mapper>

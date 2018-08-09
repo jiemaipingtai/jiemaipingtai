@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.ContactMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Contact" >
+    <id column="con_id" property="conId" jdbcType="INTEGER" />
+    <result column="com_id" property="comId" jdbcType="INTEGER" />
+    <result column="ord_id" property="ordId" jdbcType="INTEGER" />
+    <result column="ord_number" property="ordNumber" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    con_id, com_id, ord_id, ord_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from contact
+    where con_id = #{conId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from contact
+    where con_id = #{conId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Contact" >
+    insert into contact (con_id, com_id, ord_id, 
+      ord_number)
+    values (#{conId,jdbcType=INTEGER}, #{comId,jdbcType=INTEGER}, #{ordId,jdbcType=INTEGER}, 
+      #{ordNumber,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Contact" >
+    insert into contact
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="conId != null" >
+        con_id,
+      </if>
+      <if test="comId != null" >
+        com_id,
+      </if>
+      <if test="ordId != null" >
+        ord_id,
+      </if>
+      <if test="ordNumber != null" >
+        ord_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="conId != null" >
+        #{conId,jdbcType=INTEGER},
+      </if>
+      <if test="comId != null" >
+        #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="ordId != null" >
+        #{ordId,jdbcType=INTEGER},
+      </if>
+      <if test="ordNumber != null" >
+        #{ordNumber,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Contact" >
+    update contact
+    <set >
+      <if test="comId != null" >
+        com_id = #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="ordId != null" >
+        ord_id = #{ordId,jdbcType=INTEGER},
+      </if>
+      <if test="ordNumber != null" >
+        ord_number = #{ordNumber,jdbcType=CHAR},
+      </if>
+    </set>
+    where con_id = #{conId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Contact" >
+    update contact
+    set com_id = #{comId,jdbcType=INTEGER},
+      ord_id = #{ordId,jdbcType=INTEGER},
+      ord_number = #{ordNumber,jdbcType=CHAR}
+    where con_id = #{conId,jdbcType=INTEGER}
+  </update>
+</mapper>

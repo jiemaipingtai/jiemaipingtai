@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.Company_typeMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Company_type" >
+    <id column="comtype_id" property="comtypeId" jdbcType="INTEGER" />
+    <result column="comtype_name" property="comtypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    comtype_id, comtype_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from company_type
+    where comtype_id = #{comtypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from company_type
+    where comtype_id = #{comtypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Company_type" >
+    insert into company_type (comtype_id, comtype_name)
+    values (#{comtypeId,jdbcType=INTEGER}, #{comtypeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Company_type" >
+    insert into company_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="comtypeId != null" >
+        comtype_id,
+      </if>
+      <if test="comtypeName != null" >
+        comtype_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="comtypeId != null" >
+        #{comtypeId,jdbcType=INTEGER},
+      </if>
+      <if test="comtypeName != null" >
+        #{comtypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Company_type" >
+    update company_type
+    <set >
+      <if test="comtypeName != null" >
+        comtype_name = #{comtypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where comtype_id = #{comtypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Company_type" >
+    update company_type
+    set comtype_name = #{comtypeName,jdbcType=VARCHAR}
+    where comtype_id = #{comtypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

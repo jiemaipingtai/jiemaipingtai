@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.Bank_nameMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Bank_name" >
+    <id column="bana_id" property="banaId" jdbcType="INTEGER" />
+    <result column="bana_name" property="banaName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bana_id, bana_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bank_name
+    where bana_id = #{banaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bank_name
+    where bana_id = #{banaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Bank_name" >
+    insert into bank_name (bana_id, bana_name)
+    values (#{banaId,jdbcType=INTEGER}, #{banaName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Bank_name" >
+    insert into bank_name
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="banaId != null" >
+        bana_id,
+      </if>
+      <if test="banaName != null" >
+        bana_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="banaId != null" >
+        #{banaId,jdbcType=INTEGER},
+      </if>
+      <if test="banaName != null" >
+        #{banaName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Bank_name" >
+    update bank_name
+    <set >
+      <if test="banaName != null" >
+        bana_name = #{banaName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bana_id = #{banaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Bank_name" >
+    update bank_name
+    set bana_name = #{banaName,jdbcType=VARCHAR}
+    where bana_id = #{banaId,jdbcType=INTEGER}
+  </update>
+</mapper>

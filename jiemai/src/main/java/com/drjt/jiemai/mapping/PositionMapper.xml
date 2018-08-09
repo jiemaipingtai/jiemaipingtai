@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.PositionMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Position" >
+    <id column="pos_id" property="posId" jdbcType="INTEGER" />
+    <result column="pos_name" property="posName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pos_id, pos_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from position
+    where pos_id = #{posId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from position
+    where pos_id = #{posId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Position" >
+    insert into position (pos_id, pos_name)
+    values (#{posId,jdbcType=INTEGER}, #{posName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Position" >
+    insert into position
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="posId != null" >
+        pos_id,
+      </if>
+      <if test="posName != null" >
+        pos_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="posId != null" >
+        #{posId,jdbcType=INTEGER},
+      </if>
+      <if test="posName != null" >
+        #{posName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Position" >
+    update position
+    <set >
+      <if test="posName != null" >
+        pos_name = #{posName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pos_id = #{posId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Position" >
+    update position
+    set pos_name = #{posName,jdbcType=VARCHAR}
+    where pos_id = #{posId,jdbcType=INTEGER}
+  </update>
+</mapper>

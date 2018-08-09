@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.CountryMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Country" >
+    <id column="cou_id" property="couId" jdbcType="INTEGER" />
+    <result column="cou_english" property="couEnglish" jdbcType="VARCHAR" />
+    <result column="cou_name" property="couName" jdbcType="VARCHAR" />
+    <result column="Consignee" property="consignee" jdbcType="VARCHAR" />
+    <result column="national_code" property="nationalCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cou_id, cou_english, cou_name, Consignee, national_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from country
+    where cou_id = #{couId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from country
+    where cou_id = #{couId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Country" >
+    insert into country (cou_id, cou_english, cou_name, 
+      Consignee, national_code)
+    values (#{couId,jdbcType=INTEGER}, #{couEnglish,jdbcType=VARCHAR}, #{couName,jdbcType=VARCHAR}, 
+      #{consignee,jdbcType=VARCHAR}, #{nationalCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Country" >
+    insert into country
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="couId != null" >
+        cou_id,
+      </if>
+      <if test="couEnglish != null" >
+        cou_english,
+      </if>
+      <if test="couName != null" >
+        cou_name,
+      </if>
+      <if test="consignee != null" >
+        Consignee,
+      </if>
+      <if test="nationalCode != null" >
+        national_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="couId != null" >
+        #{couId,jdbcType=INTEGER},
+      </if>
+      <if test="couEnglish != null" >
+        #{couEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="couName != null" >
+        #{couName,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalCode != null" >
+        #{nationalCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Country" >
+    update country
+    <set >
+      <if test="couEnglish != null" >
+        cou_english = #{couEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="couName != null" >
+        cou_name = #{couName,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        Consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalCode != null" >
+        national_code = #{nationalCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cou_id = #{couId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Country" >
+    update country
+    set cou_english = #{couEnglish,jdbcType=VARCHAR},
+      cou_name = #{couName,jdbcType=VARCHAR},
+      Consignee = #{consignee,jdbcType=VARCHAR},
+      national_code = #{nationalCode,jdbcType=VARCHAR}
+    where cou_id = #{couId,jdbcType=INTEGER}
+  </update>
+</mapper>

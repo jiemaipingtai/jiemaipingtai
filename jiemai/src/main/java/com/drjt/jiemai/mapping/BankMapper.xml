@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.BankMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Bank" >
+    <id column="ban_id" property="banId" jdbcType="INTEGER" />
+    <result column="bana_id" property="banaId" jdbcType="INTEGER" />
+    <result column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="cou_id" property="couId" jdbcType="INTEGER" />
+    <result column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="cit_id" property="citId" jdbcType="INTEGER" />
+    <result column="ban_openname" property="banOpenname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ban_id, bana_id, address_id, cou_id, pro_id, cit_id, ban_openname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bank
+    where ban_id = #{banId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bank
+    where ban_id = #{banId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Bank" >
+    insert into bank (ban_id, bana_id, address_id, 
+      cou_id, pro_id, cit_id, 
+      ban_openname)
+    values (#{banId,jdbcType=INTEGER}, #{banaId,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, 
+      #{couId,jdbcType=INTEGER}, #{proId,jdbcType=INTEGER}, #{citId,jdbcType=INTEGER}, 
+      #{banOpenname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Bank" >
+    insert into bank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="banId != null" >
+        ban_id,
+      </if>
+      <if test="banaId != null" >
+        bana_id,
+      </if>
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="couId != null" >
+        cou_id,
+      </if>
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="citId != null" >
+        cit_id,
+      </if>
+      <if test="banOpenname != null" >
+        ban_openname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="banId != null" >
+        #{banId,jdbcType=INTEGER},
+      </if>
+      <if test="banaId != null" >
+        #{banaId,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="couId != null" >
+        #{couId,jdbcType=INTEGER},
+      </if>
+      <if test="proId != null" >
+        #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="citId != null" >
+        #{citId,jdbcType=INTEGER},
+      </if>
+      <if test="banOpenname != null" >
+        #{banOpenname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Bank" >
+    update bank
+    <set >
+      <if test="banaId != null" >
+        bana_id = #{banaId,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="couId != null" >
+        cou_id = #{couId,jdbcType=INTEGER},
+      </if>
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="citId != null" >
+        cit_id = #{citId,jdbcType=INTEGER},
+      </if>
+      <if test="banOpenname != null" >
+        ban_openname = #{banOpenname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ban_id = #{banId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Bank" >
+    update bank
+    set bana_id = #{banaId,jdbcType=INTEGER},
+      address_id = #{addressId,jdbcType=INTEGER},
+      cou_id = #{couId,jdbcType=INTEGER},
+      pro_id = #{proId,jdbcType=INTEGER},
+      cit_id = #{citId,jdbcType=INTEGER},
+      ban_openname = #{banOpenname,jdbcType=VARCHAR}
+    where ban_id = #{banId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.ProvinceMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Province" >
+    <id column="pro_id" property="proId" jdbcType="INTEGER" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="national_code" property="nationalCode" jdbcType="VARCHAR" />
+    <result column="city_number" property="cityNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pro_id, pro_name, national_code, city_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from province
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from province
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Province" >
+    insert into province (pro_id, pro_name, national_code, 
+      city_number)
+    values (#{proId,jdbcType=INTEGER}, #{proName,jdbcType=VARCHAR}, #{nationalCode,jdbcType=VARCHAR}, 
+      #{cityNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Province" >
+    insert into province
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="proName != null" >
+        pro_name,
+      </if>
+      <if test="nationalCode != null" >
+        national_code,
+      </if>
+      <if test="cityNumber != null" >
+        city_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalCode != null" >
+        #{nationalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityNumber != null" >
+        #{cityNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Province" >
+    update province
+    <set >
+      <if test="proName != null" >
+        pro_name = #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalCode != null" >
+        national_code = #{nationalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityNumber != null" >
+        city_number = #{cityNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Province" >
+    update province
+    set pro_name = #{proName,jdbcType=VARCHAR},
+      national_code = #{nationalCode,jdbcType=VARCHAR},
+      city_number = #{cityNumber,jdbcType=VARCHAR}
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </update>
+</mapper>

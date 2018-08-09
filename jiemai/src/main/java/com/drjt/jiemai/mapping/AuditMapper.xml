@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.AuditMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Audit" >
+    <id column="aud_id" property="audId" jdbcType="INTEGER" />
+    <result column="aud_type" property="audType" jdbcType="INTEGER" />
+    <result column="aud_time" property="audTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    aud_id, aud_type, aud_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from audit
+    where aud_id = #{audId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from audit
+    where aud_id = #{audId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Audit" >
+    insert into audit (aud_id, aud_type, aud_time
+      )
+    values (#{audId,jdbcType=INTEGER}, #{audType,jdbcType=INTEGER}, #{audTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Audit" >
+    insert into audit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="audId != null" >
+        aud_id,
+      </if>
+      <if test="audType != null" >
+        aud_type,
+      </if>
+      <if test="audTime != null" >
+        aud_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="audId != null" >
+        #{audId,jdbcType=INTEGER},
+      </if>
+      <if test="audType != null" >
+        #{audType,jdbcType=INTEGER},
+      </if>
+      <if test="audTime != null" >
+        #{audTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Audit" >
+    update audit
+    <set >
+      <if test="audType != null" >
+        aud_type = #{audType,jdbcType=INTEGER},
+      </if>
+      <if test="audTime != null" >
+        aud_time = #{audTime,jdbcType=DATE},
+      </if>
+    </set>
+    where aud_id = #{audId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Audit" >
+    update audit
+    set aud_type = #{audType,jdbcType=INTEGER},
+      aud_time = #{audTime,jdbcType=DATE}
+    where aud_id = #{audId,jdbcType=INTEGER}
+  </update>
+</mapper>

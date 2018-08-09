@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drjt.jiemai.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.drjt.jiemai.pojo.Account" >
+    <id column="acc_id" property="accId" jdbcType="INTEGER" />
+    <result column="ban_id" property="banId" jdbcType="INTEGER" />
+    <result column="acc_number" property="accNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    acc_id, ban_id, acc_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where acc_id = #{accId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from account
+    where acc_id = #{accId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drjt.jiemai.pojo.Account" >
+    insert into account (acc_id, ban_id, acc_number
+      )
+    values (#{accId,jdbcType=INTEGER}, #{banId,jdbcType=INTEGER}, #{accNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Account" >
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accId != null" >
+        acc_id,
+      </if>
+      <if test="banId != null" >
+        ban_id,
+      </if>
+      <if test="accNumber != null" >
+        acc_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accId != null" >
+        #{accId,jdbcType=INTEGER},
+      </if>
+      <if test="banId != null" >
+        #{banId,jdbcType=INTEGER},
+      </if>
+      <if test="accNumber != null" >
+        #{accNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drjt.jiemai.pojo.Account" >
+    update account
+    <set >
+      <if test="banId != null" >
+        ban_id = #{banId,jdbcType=INTEGER},
+      </if>
+      <if test="accNumber != null" >
+        acc_number = #{accNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where acc_id = #{accId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Account" >
+    update account
+    set ban_id = #{banId,jdbcType=INTEGER},
+      acc_number = #{accNumber,jdbcType=VARCHAR}
+    where acc_id = #{accId,jdbcType=INTEGER}
+  </update>
+</mapper>
