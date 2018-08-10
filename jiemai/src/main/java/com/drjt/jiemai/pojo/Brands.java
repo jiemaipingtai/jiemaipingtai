@@ -11,6 +11,8 @@ public class Brands {
 
     private String braNikename;
 
+    private String braRealname;
+
     private Integer braSerx;
 
     private String braPhone;
@@ -30,8 +32,6 @@ public class Brands {
     private Date braModdate;
 
     private Integer braOperation;
-
-    private byte[] braRealname;
 
     public Integer getBraId() {
         return braId;
@@ -63,6 +63,14 @@ public class Brands {
 
     public void setBraNikename(String braNikename) {
         this.braNikename = braNikename == null ? null : braNikename.trim();
+    }
+
+    public String getBraRealname() {
+        return braRealname;
+    }
+
+    public void setBraRealname(String braRealname) {
+        this.braRealname = braRealname == null ? null : braRealname.trim();
     }
 
     public Integer getBraSerx() {
@@ -143,13 +151,5 @@ public class Brands {
 
     public void setBraOperation(Integer braOperation) {
         this.braOperation = braOperation;
-    }
-
-    public byte[] getBraRealname() {
-        return braRealname;
-    }
-
-    public void setBraRealname(byte[] braRealname) {
-        this.braRealname = braRealname;
     }
 }

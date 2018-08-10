@@ -6,6 +6,7 @@
     <result column="bra_name" property="braName" jdbcType="VARCHAR" />
     <result column="bra_pwd" property="braPwd" jdbcType="VARCHAR" />
     <result column="bra_nikename" property="braNikename" jdbcType="VARCHAR" />
+    <result column="bra_realname" property="braRealname" jdbcType="VARCHAR" />
     <result column="bra_serx" property="braSerx" jdbcType="INTEGER" />
     <result column="bra_phone" property="braPhone" jdbcType="VARCHAR" />
     <result column="bra_email" property="braEmail" jdbcType="VARCHAR" />
@@ -13,25 +14,17 @@
     <result column="company_id" property="companyId" jdbcType="INTEGER" />
     <result column="money_id" property="moneyId" jdbcType="INTEGER" />
     <result column="usersta_id" property="userstaId" jdbcType="INTEGER" />
-    <result column="bra_regdate" property="braRegdate" jdbcType="DATE" />
-    <result column="bra_moddate" property="braModdate" jdbcType="DATE" />
+    <result column="bra_regdate" property="braRegdate" jdbcType="TIMESTAMP" />
+    <result column="bra_moddate" property="braModdate" jdbcType="TIMESTAMP" />
     <result column="bra_operation" property="braOperation" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.drjt.jiemai.pojo.Brands" extends="BaseResultMap" >
-    <result column="bra_realname" property="braRealname" jdbcType="VARBINARY" />
-  </resultMap>
   <sql id="Base_Column_List" >
-    bra_id, bra_name, bra_pwd, bra_nikename, bra_serx, bra_phone, bra_email, pos_id, 
-    company_id, money_id, usersta_id, bra_regdate, bra_moddate, bra_operation
+    bra_id, bra_name, bra_pwd, bra_nikename, bra_realname, bra_serx, bra_phone, bra_email, 
+    pos_id, company_id, money_id, usersta_id, bra_regdate, bra_moddate, bra_operation
   </sql>
-  <sql id="Blob_Column_List" >
-    bra_realname
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from brands
     where bra_id = #{braId,jdbcType=INTEGER}
   </select>
@@ -41,16 +34,16 @@
   </delete>
   <insert id="insert" parameterType="com.drjt.jiemai.pojo.Brands" >
     insert into brands (bra_id, bra_name, bra_pwd, 
-      bra_nikename, bra_serx, bra_phone, 
-      bra_email, pos_id, company_id, 
-      money_id, usersta_id, bra_regdate, 
-      bra_moddate, bra_operation, bra_realname
+      bra_nikename, bra_realname, bra_serx, 
+      bra_phone, bra_email, pos_id, 
+      company_id, money_id, usersta_id, 
+      bra_regdate, bra_moddate, bra_operation
       )
     values (#{braId,jdbcType=INTEGER}, #{braName,jdbcType=VARCHAR}, #{braPwd,jdbcType=VARCHAR}, 
-      #{braNikename,jdbcType=VARCHAR}, #{braSerx,jdbcType=INTEGER}, #{braPhone,jdbcType=VARCHAR}, 
-      #{braEmail,jdbcType=VARCHAR}, #{posId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
-      #{moneyId,jdbcType=INTEGER}, #{userstaId,jdbcType=INTEGER}, #{braRegdate,jdbcType=DATE}, 
-      #{braModdate,jdbcType=DATE}, #{braOperation,jdbcType=INTEGER}, #{braRealname,jdbcType=VARBINARY}
+      #{braNikename,jdbcType=VARCHAR}, #{braRealname,jdbcType=VARCHAR}, #{braSerx,jdbcType=INTEGER}, 
+      #{braPhone,jdbcType=VARCHAR}, #{braEmail,jdbcType=VARCHAR}, #{posId,jdbcType=INTEGER}, 
+      #{companyId,jdbcType=INTEGER}, #{moneyId,jdbcType=INTEGER}, #{userstaId,jdbcType=INTEGER}, 
+      #{braRegdate,jdbcType=TIMESTAMP}, #{braModdate,jdbcType=TIMESTAMP}, #{braOperation,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.drjt.jiemai.pojo.Brands" >
@@ -67,6 +60,9 @@
       </if>
       <if test="braNikename != null" >
         bra_nikename,
+      </if>
+      <if test="braRealname != null" >
+        bra_realname,
       </if>
       <if test="braSerx != null" >
         bra_serx,
@@ -98,9 +94,6 @@
       <if test="braOperation != null" >
         bra_operation,
       </if>
-      <if test="braRealname != null" >
-        bra_realname,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="braId != null" >
@@ -114,6 +107,9 @@
       </if>
       <if test="braNikename != null" >
         #{braNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="braRealname != null" >
+        #{braRealname,jdbcType=VARCHAR},
       </if>
       <if test="braSerx != null" >
         #{braSerx,jdbcType=INTEGER},
@@ -137,16 +133,13 @@
         #{userstaId,jdbcType=INTEGER},
       </if>
       <if test="braRegdate != null" >
-        #{braRegdate,jdbcType=DATE},
+        #{braRegdate,jdbcType=TIMESTAMP},
       </if>
       <if test="braModdate != null" >
-        #{braModdate,jdbcType=DATE},
+        #{braModdate,jdbcType=TIMESTAMP},
       </if>
       <if test="braOperation != null" >
         #{braOperation,jdbcType=INTEGER},
-      </if>
-      <if test="braRealname != null" >
-        #{braRealname,jdbcType=VARBINARY},
       </if>
     </trim>
   </insert>
@@ -161,6 +154,9 @@
       </if>
       <if test="braNikename != null" >
         bra_nikename = #{braNikename,jdbcType=VARCHAR},
+      </if>
+      <if test="braRealname != null" >
+        bra_realname = #{braRealname,jdbcType=VARCHAR},
       </if>
       <if test="braSerx != null" >
         bra_serx = #{braSerx,jdbcType=INTEGER},
@@ -184,36 +180,15 @@
         usersta_id = #{userstaId,jdbcType=INTEGER},
       </if>
       <if test="braRegdate != null" >
-        bra_regdate = #{braRegdate,jdbcType=DATE},
+        bra_regdate = #{braRegdate,jdbcType=TIMESTAMP},
       </if>
       <if test="braModdate != null" >
-        bra_moddate = #{braModdate,jdbcType=DATE},
+        bra_moddate = #{braModdate,jdbcType=TIMESTAMP},
       </if>
       <if test="braOperation != null" >
         bra_operation = #{braOperation,jdbcType=INTEGER},
       </if>
-      <if test="braRealname != null" >
-        bra_realname = #{braRealname,jdbcType=VARBINARY},
-      </if>
     </set>
-    where bra_id = #{braId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.drjt.jiemai.pojo.Brands" >
-    update brands
-    set bra_name = #{braName,jdbcType=VARCHAR},
-      bra_pwd = #{braPwd,jdbcType=VARCHAR},
-      bra_nikename = #{braNikename,jdbcType=VARCHAR},
-      bra_serx = #{braSerx,jdbcType=INTEGER},
-      bra_phone = #{braPhone,jdbcType=VARCHAR},
-      bra_email = #{braEmail,jdbcType=VARCHAR},
-      pos_id = #{posId,jdbcType=INTEGER},
-      company_id = #{companyId,jdbcType=INTEGER},
-      money_id = #{moneyId,jdbcType=INTEGER},
-      usersta_id = #{userstaId,jdbcType=INTEGER},
-      bra_regdate = #{braRegdate,jdbcType=DATE},
-      bra_moddate = #{braModdate,jdbcType=DATE},
-      bra_operation = #{braOperation,jdbcType=INTEGER},
-      bra_realname = #{braRealname,jdbcType=VARBINARY}
     where bra_id = #{braId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.drjt.jiemai.pojo.Brands" >
@@ -221,6 +196,7 @@
     set bra_name = #{braName,jdbcType=VARCHAR},
       bra_pwd = #{braPwd,jdbcType=VARCHAR},
       bra_nikename = #{braNikename,jdbcType=VARCHAR},
+      bra_realname = #{braRealname,jdbcType=VARCHAR},
       bra_serx = #{braSerx,jdbcType=INTEGER},
       bra_phone = #{braPhone,jdbcType=VARCHAR},
       bra_email = #{braEmail,jdbcType=VARCHAR},
@@ -228,8 +204,8 @@
       company_id = #{companyId,jdbcType=INTEGER},
       money_id = #{moneyId,jdbcType=INTEGER},
       usersta_id = #{userstaId,jdbcType=INTEGER},
-      bra_regdate = #{braRegdate,jdbcType=DATE},
-      bra_moddate = #{braModdate,jdbcType=DATE},
+      bra_regdate = #{braRegdate,jdbcType=TIMESTAMP},
+      bra_moddate = #{braModdate,jdbcType=TIMESTAMP},
       bra_operation = #{braOperation,jdbcType=INTEGER}
     where bra_id = #{braId,jdbcType=INTEGER}
   </update>

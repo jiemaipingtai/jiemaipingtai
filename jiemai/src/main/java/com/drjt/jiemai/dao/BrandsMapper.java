@@ -13,7 +13,5 @@ public interface BrandsMapper {
 
     int updateByPrimaryKeySelective(Brands record);
 
-    int updateByPrimaryKeyWithBLOBs(Brands record);
-
     int updateByPrimaryKey(Brands record);
 }
